@@ -1,6 +1,6 @@
--D__AVR_ATmega8__
+-D__AVR_ATmega16__
 -I/usr/lib/avr/include/
--I/usr/lib/gcc/avr/4.9.2/include
--I/usr/lib/gcc/avr/4.9.2/include-fixed
+-I/usr/lib/gcc/avr/5.4.0/include
+-I/usr/lib/gcc/avr/5.4.0/include-fixed
 -I.
--DF_CPU=8000000UL
+-DF_CPU=9216000UL

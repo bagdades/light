@@ -16,6 +16,15 @@
  * =====================================================================================
  */
 
+#include "light.h"
+#include "usart.h"
+
+const char text[] PROGMEM = "Flash text proba.";
+
 int main(void) {
+	UsartInit(19200);
+	sei();
+	UsartSendString("Hello, World!");
+	UsartSendStringFlash(text);
 	while(1);
 }
