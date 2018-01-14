@@ -47,7 +47,7 @@ void UsartInit(uint16_t baudRate){
 			(1 << RXCIE);//enable tx ,enable interrupt tx
 }
 
-void UsartFlushBuffer(void)
+void UsartFlushTxBuffer(void)
 {
 	txBufferTail = 0;
 	txBufferHead = 0;
@@ -97,25 +97,30 @@ ISR(USART_TXC_vect){
 	}
 }
 
+uint8_t UsartGetRxCount(void)
+{
+	return rxBufferCount;
+}
+
 uint8_t  UsartGetChar(void){
 	uint8_t ch = 0;
-	/* if(rxCountBuffer){ */
-	/* 	ch = usartRxBuffer[rxTailBuffer]; */
-	/* 	rxCountBuffer --; */
-	/* 	rxTailBuffer ++; */
-	/* 	if(rxTailBuffer == USART_RX_BUFFER_SIZE) */
-	/* 		rxTailBuffer = 0; */
-	/* } */
+	if(rxBufferCount){
+		ch = usartRxBuffer[rxBufferTail];
+		rxBufferCount --;
+		rxBufferTail ++;
+		if(rxBufferTail == USART_RX_BUFFER_SIZE)
+			rxBufferTail = 0;
+	}
 	return ch;
 }
 
 ISR(USART_RXC_vect){
-	/* if(rxCountBuffer < USART_RX_BUFFER_SIZE){ */
-	/* 	usartRxBuffer[rxHeadBuffer] = UDR; */
-	/* 	rxHeadBuffer ++; */
-	/* 	rxCountBuffer ++; */
-	/* 	if(rxHeadBuffer ==  USART_TX_BUFFER_SIZE) */
-	/* 		rxHeadBuffer = 0; */
-	/* } */
+	if(rxBufferCount < USART_RX_BUFFER_SIZE){
+		usartRxBuffer[rxBufferHead] = UDR;
+		rxBufferHead ++;
+		rxBufferCount ++;
+		if(rxBufferHead ==  USART_TX_BUFFER_SIZE)
+			rxBufferHead = 0;
+	}
 }
 

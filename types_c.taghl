@@ -1,6 +1,7 @@
-syn keyword CTagsLocalVariable n sym ubrrValue ch
-syn keyword CTagsGlobalVariable usartTxBuffer rxBufferTail usartRxBuffer txBufferHead txBufferCount txBufferTail rxBufferCount rxBufferHead
-syn keyword CTagsConstant v2 v1 c1 c2
-syn keyword CTagsFunction Timer0Init ISR UsartInit UsartPutChar UsartSendStringFlash ADCRead ADCInit InitSystem UsartFlushBuffer ConvertTempADC ConvertADCTemp UsartSendString main UsartGetChar
-syn keyword CTagsDefinedName ADC_VREF_TYPE LIGHT_INC USART_BAUDRATE_DIV USART_INC T0_FREQ T0_PRESC T0_INIT USART_BAUDRATE USART_TX_BUFFER_SIZE USART_RX_BUFFER_SIZE
+syn keyword CTagsLocalVariable sym symbol ubrrValue value ch resp n i
+syn keyword CTagsGlobalVariable usartRxBuffer wordFlag txBufferHead rxBufferTail rxBufferHead txBufferTail argv txBufferCount usartTxBuffer parserBufferCount argc parserBuffer rxBufferCount
+syn keyword CTagsConstant PROGMEM c1 c2 v1 v2
+syn keyword CTagsEnumerationValue FALSE TRUE
+syn keyword CTagsFunction ParserEqualString UsartSendString ParserEqualStringFlash ParserStringToUint ParserParse ADCInit UsartGetChar UsartSendStringFlash InitSystem UsartFlushTxBuffer UsartGetRxCount main UsartInit ParserStringToUchar Timer0Init ConvertTempADC ADCRead ConvertADCTemp UsartPutChar ISR ParserHandler ParserInit
+syn keyword CTagsDefinedName ADC_VREF_TYPE T0_INIT T0_PRESC T0_FREQ USART_INC USART_TX_BUFFER_SIZE USART_BAUDRATE USART_BAUDRATE_DIV LIGHT_INC AMOUT_PAIR USART_RX_BUFFER_SIZE SIZE_RECEIVE_BUFFER PARSER_INC
 

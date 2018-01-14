@@ -15,10 +15,11 @@
 
 //Prototypes
 void UsartInit				(uint16_t baudRate);
-void UsartFlushBuffer		(void);
+void UsartFlushTxBuffer		(void);
 void UsartPutChar			(char ch);
 void UsartSendString		(char *string);
 void UsartSendStringFlash	(const char *string);
 uint8_t UsartGetChar		(void);
+uint8_t UsartGetRxCount		(void);
 
 #endif   /* ----- #ifndef USART_INC  ----- */
