@@ -5,7 +5,7 @@
 #include <avr/pgmspace.h>
 
 #define SIZE_RECEIVE_BUFFER		16
-#define AMOUT_PAIR				2
+#define AMOUNT_PAIR				2
 
 
 enum {

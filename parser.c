@@ -19,7 +19,7 @@
 #include "parser.h"
 
 char parserBuffer[SIZE_RECEIVE_BUFFER];
-char *argv[AMOUT_PAIR];
+char *argv[AMOUNT_PAIR];
 uint8_t argc;
 
 static uint8_t parserBufferCount = 0;
@@ -38,33 +38,33 @@ void ParserParse(char chr)
 	if (chr != '\r') {
 		if (parserBufferCount < SIZE_RECEIVE_BUFFER - 1) {
 			if (chr != ' ') {
-				if (!argc) {
-					argv[0] = parserBuffer;
+				if (!argc) {                    /* if first argument */
+					argv[0] = parserBuffer;     /* set address of first argument value*/
 					argc++;
 				}
-				if (wordFlag) {
-					if (argc < AMOUT_PAIR) {
-						argv[argc] = &parserBuffer[parserBufferCount];
+				if (wordFlag) {                 /* if receive word */
+					if (argc < AMOUNT_PAIR) {
+						argv[argc] = &parserBuffer[parserBufferCount]; /* Set address of second argument value*/
 						argc++;
 					}
 					wordFlag = FALSE;
 				}
 				parserBuffer[parserBufferCount] = chr;
 				parserBufferCount++;
-			} else {
+			} else {                            /* if receive "space" */
 				if (!wordFlag) {
-					parserBuffer[parserBufferCount] = 0;
+					parserBuffer[parserBufferCount] = 0; /* set string end */
 					parserBufferCount++;
-					wordFlag = TRUE;
+					wordFlag = TRUE;            /* set flag recive word */
 				}
 			}
 		}
 		parserBuffer[parserBufferCount] = 0;
 		return;
-	} else {
+	} else {                                    /* if receive '\r'  */
 		parserBuffer[parserBufferCount] = 0;
 		if (argc) {
-			ParserHandler(argc, argv);
+			ParserHandler(argc, argv);          /* Start parser handler */
 		}
 		argc = 0;
 		wordFlag = FALSE;

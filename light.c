@@ -33,15 +33,15 @@ void InitSystem(void)
 
 }
 
-void Timer0Init(void)
-{
-#if(F_CPU != 9216000)
-#error ***You must set TCCR0
-#endif
-	TCCR0 |= (1 << CS02) | (1 << CS00);  //T0_PRESC = 1024
-	TCNT0 = T0_INIT;
-	TIMSK |= (1 << TOIE0);  //enable interrupt overllow timer0
-}
+/* void Timer0Init(void) */
+/* { */
+/* #if(F_CPU != 9216000) */
+/* #error ***You must set TCCR0 */
+/* #endif */
+/* 	TCCR0 |= (1 << CS02) | (1 << CS00);  //T0_PRESC = 1024 */
+/* 	TCNT0 = T0_INIT; */
+/* 	TIMSK |= (1 << TOIE0);  //enable interrupt overllow timer0 */
+/* } */
 
 void ADCInit(void)
 {
@@ -81,7 +81,3 @@ int ConvertADCTemp(int value){
 	return ((int)((n * (float)value) - (n * v1) + c1));
 }
 
-ISR(TIMER0_OVF_vect)
-{
-
-}

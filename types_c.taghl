@@ -1,7 +1,10 @@
-syn keyword CTagsLocalVariable sym symbol ubrrValue value ch resp n i
-syn keyword CTagsGlobalVariable usartRxBuffer wordFlag txBufferHead rxBufferTail rxBufferHead txBufferTail argv txBufferCount usartTxBuffer parserBufferCount argc parserBuffer rxBufferCount
-syn keyword CTagsConstant PROGMEM c1 c2 v1 v2
+syn keyword CTagsLocalVariable sym retVal ch n ubrrValue value i symbol ii resp
+syn keyword CTagsStructure _task
+syn keyword CTagsMember pfunc period delay run
+syn keyword CTagsGlobalVariable usartTxBuffer argv rxBufferCount wordFlag argc rxBufferHead txBufferCount usartRxBuffer rxBufferTail txBufferHead txBufferTail parserBuffer taskArray parserBufferCount
+syn keyword CTagsConstant PROGMEM v2 c2 c1 v1
 syn keyword CTagsEnumerationValue FALSE TRUE
-syn keyword CTagsFunction ParserEqualString UsartSendString ParserEqualStringFlash ParserStringToUint ParserParse ADCInit UsartGetChar UsartSendStringFlash InitSystem UsartFlushTxBuffer UsartGetRxCount main UsartInit ParserStringToUchar Timer0Init ConvertTempADC ADCRead ConvertADCTemp UsartPutChar ISR ParserHandler ParserInit
-syn keyword CTagsDefinedName ADC_VREF_TYPE T0_INIT T0_PRESC T0_FREQ USART_INC USART_TX_BUFFER_SIZE USART_BAUDRATE USART_BAUDRATE_DIV LIGHT_INC AMOUT_PAIR USART_RX_BUFFER_SIZE SIZE_RECEIVE_BUFFER PARSER_INC
+syn keyword CTagsFunction UsartSendString SchedulerDeleteTask main ConvertTempADC ConvertADCTemp pfunc UsartFlushTxBuffer ParserHandler UsartGetRxCount ADCRead ISR Task1 ParserStringToUchar UsartPutChar ParserStringToUint Task2 Task4 UsartSendStringFlash InitSystem ParserParse ParserEqualString SchedulerAddTask SchedulerInit ParserEqualStringFlash SchedulerDispatch ADCInit UsartGetChar ParserInit UsartInit Task3
+syn keyword CTagsType task
+syn keyword CTagsDefinedName MAXTASKS PARSER_INC ADC_VREF_TYPE T0_FREQ AMOUNT_PAIR USART_TX_BUFFER_SIZE USART_BAUDRATE_DIV T0_INIT T0_PRESC SCHEDULER_INC USART_INC LIGHT_INC USART_BAUDRATE SIZE_RECEIVE_BUFFER USART_RX_BUFFER_SIZE
 

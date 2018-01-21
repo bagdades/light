@@ -19,13 +19,14 @@
 #include "light.h"
 #include "usart.h"
 #include "parser.h"
+#include "scheduler.h"
 #include <util/delay.h>
 
 const char text[] PROGMEM = "Flash text proba.";
-const char error[] PROGMEM = "error\r";
-const char ok[] PROGMEM = "ok\r";
-const char largeValue[] PROGMEM = "large value\r";
-const char strt[] PROGMEM = "start\r";
+const char error[] PROGMEM = "error\r\n";
+const char ok[] PROGMEM = "ok\r\n";
+const char largeValue[] PROGMEM = "large value\r\n";
+const char strt[] PROGMEM = "start\r\n";
 
 void ParserHandler(uint8_t argc, char *argv[])
 {
@@ -44,17 +45,42 @@ void ParserHandler(uint8_t argc, char *argv[])
 	UsartSendStringFlash(resp);
 }
 
-int main(void) {
+void Task1(void)
+{
+	UsartSendString("1\n");
+}
+
+void Task2(void)
+{
+	UsartSendString("2\n");
+}
+
+void Task3(void)
+{
+	SchedulerDeleteTask(Task2);
+	UsartSendString("3\n");
+}
+
+void Task4(void)
+{
 	uint8_t symbol;
+	if (UsartGetRxCount()) {
+		symbol = UsartGetChar();
+		ParserParse(symbol);
+	}
+}
+
+int main(void) {
 	UsartInit(9600);
+	SchedulerInit();
 	sei();
-	UsartSendString("Hello, World!");
+	UsartSendString("Hello, World!\n");
 	UsartSendStringFlash(text);
+	SchedulerAddTask(Task1, 0, 2000);
+	SchedulerAddTask(Task2, 0, 2000);
+	SchedulerAddTask(Task3, 3000, 0);
+	SchedulerAddTask(Task4, 1, 10);
 	while(1) {
-		_delay_ms(20);
-		if (UsartGetRxCount()) {
-			symbol = UsartGetChar();
-			ParserParse(symbol);
-		}
+		SchedulerDispatch();
 	}
 }
