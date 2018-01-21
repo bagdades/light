@@ -26,7 +26,16 @@ const char text[] PROGMEM = "Flash text proba.";
 const char error[] PROGMEM = "error\r\n";
 const char ok[] PROGMEM = "ok\r\n";
 const char largeValue[] PROGMEM = "large value\r\n";
-const char strt[] PROGMEM = "start\r\n";
+const char start[] PROGMEM = "start\r\n";
+const char tempOut[] PROGMEM = "Temperature = ";
+char number[6] = {' ', ' ', ' ', ' ', ' ', '\0'};
+
+void TemperatureToUsart(void)
+{
+	UsartSendString(number);
+	UsartPutChar('\n');
+}
+
 
 void ParserHandler(uint8_t argc, char *argv[])
 {
@@ -42,26 +51,15 @@ void ParserHandler(uint8_t argc, char *argv[])
 			}
 		}	
 	}
+	if(ParserEqualString(argv[0], "Temp"))
+	{
+		resp = tempOut;
+		SchedulerAddTask(TemperatureToUsart, 0, 0);
+	}
 	UsartSendStringFlash(resp);
 }
 
-void Task1(void)
-{
-	UsartSendString("1\n");
-}
-
-void Task2(void)
-{
-	UsartSendString("2\n");
-}
-
-void Task3(void)
-{
-	SchedulerDeleteTask(Task2);
-	UsartSendString("3\n");
-}
-
-void Task4(void)
+void ListenUsart(void)
 {
 	uint8_t symbol;
 	if (UsartGetRxCount()) {
@@ -70,16 +68,25 @@ void Task4(void)
 	}
 }
 
+void MeasureTemp(void)
+{
+	int16_t temperature;
+	temperature = ADCRead(0);
+	temperature = ConvertADCTemp(temperature);
+	IntToString(temperature, number);
+	/* UsartSendString(number); */
+	/* UsartPutChar('\n'); */
+}
+
 int main(void) {
 	UsartInit(9600);
 	SchedulerInit();
+	ADCInit();
 	sei();
 	UsartSendString("Hello, World!\n");
 	UsartSendStringFlash(text);
-	SchedulerAddTask(Task1, 0, 2000);
-	SchedulerAddTask(Task2, 0, 2000);
-	SchedulerAddTask(Task3, 3000, 0);
-	SchedulerAddTask(Task4, 1, 10);
+	SchedulerAddTask(ListenUsart, 1, 10);
+	SchedulerAddTask(MeasureTemp, 100, 1000);
 	while(1) {
 		SchedulerDispatch();
 	}

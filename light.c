@@ -24,24 +24,37 @@
 
 
 const float c1 = 24;
-const float v1 = 252;
-const float c2 = 230;
-const float v2 = 159;
+const float v1 = 277;
+const float c2 = 215;
+const float v2 = 154;
 
 void InitSystem(void)
 {
 
 }
 
-/* void Timer0Init(void) */
-/* { */
-/* #if(F_CPU != 9216000) */
-/* #error ***You must set TCCR0 */
-/* #endif */
-/* 	TCCR0 |= (1 << CS02) | (1 << CS00);  //T0_PRESC = 1024 */
-/* 	TCNT0 = T0_INIT; */
-/* 	TIMSK |= (1 << TOIE0);  //enable interrupt overllow timer0 */
-/* } */
+void IntToString(int16_t value, char *strBuf)
+{
+	uint8_t i;
+	int16_t temp = value;
+	uint8_t zeroFlag = 0;
+	uint16_t div = 10000;
+
+	for (i = 0; i < 4; ++i) {
+		strBuf[i] = ' ';
+	}
+	for (i = 0; i < 4; ++i) {
+		temp = temp / div;
+		if(temp != 0 || zeroFlag)
+		{
+			strBuf[i] = temp + '0';
+			zeroFlag = 1;
+		}
+		temp = value % div;
+		div /= 10;
+	}
+	strBuf[i] = temp + '0';
+}
 
 void ADCInit(void)
 {
@@ -76,8 +89,11 @@ int ConvertTempADC(int value){
 	float n =((v1-v2)/(c1-c2));
 	return ((int)((n * (float)value) - (n *c1) + v1));
 }
+
 int ConvertADCTemp(int value){
 	float n =((c1-c2)/(v1-v2));
 	return ((int)((n * (float)value) - (n * v1) + c1));
 }
+
+
 

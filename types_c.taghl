@@ -1,10 +1,10 @@
-syn keyword CTagsLocalVariable sym retVal ch n ubrrValue value i symbol ii resp
+syn keyword CTagsLocalVariable retVal ii resp temp n temperature symbol sym zeroFlag ubrrValue div ch i value
 syn keyword CTagsStructure _task
-syn keyword CTagsMember pfunc period delay run
-syn keyword CTagsGlobalVariable usartTxBuffer argv rxBufferCount wordFlag argc rxBufferHead txBufferCount usartRxBuffer rxBufferTail txBufferHead txBufferTail parserBuffer taskArray parserBufferCount
-syn keyword CTagsConstant PROGMEM v2 c2 c1 v1
+syn keyword CTagsMember delay period run pfunc
+syn keyword CTagsGlobalVariable txBufferTail usartRxBuffer argv taskArray wordFlag rxBufferTail txBufferHead txBufferCount parserBufferCount parserBuffer argc rxBufferCount rxBufferHead number usartTxBuffer
+syn keyword CTagsConstant v2 PROGMEM v1 c2 c1
 syn keyword CTagsEnumerationValue FALSE TRUE
-syn keyword CTagsFunction UsartSendString SchedulerDeleteTask main ConvertTempADC ConvertADCTemp pfunc UsartFlushTxBuffer ParserHandler UsartGetRxCount ADCRead ISR Task1 ParserStringToUchar UsartPutChar ParserStringToUint Task2 Task4 UsartSendStringFlash InitSystem ParserParse ParserEqualString SchedulerAddTask SchedulerInit ParserEqualStringFlash SchedulerDispatch ADCInit UsartGetChar ParserInit UsartInit Task3
+syn keyword CTagsFunction ParserInit ParserStringToUchar TemperatureToUsart ListenUsart ParserHandler ADCInit UsartInit UsartSendStringFlash MeasureTemp main pfunc IntToString UsartGetChar UsartPutChar ParserStringToUint ParserEqualStringFlash InitSystem UsartSendString SchedulerDispatch ConvertADCTemp UsartGetRxCount ParserParse ADCRead ParserEqualString SchedulerAddTask SchedulerDeleteTask SchedulerInit UsartFlushTxBuffer ISR ConvertTempADC
 syn keyword CTagsType task
-syn keyword CTagsDefinedName MAXTASKS PARSER_INC ADC_VREF_TYPE T0_FREQ AMOUNT_PAIR USART_TX_BUFFER_SIZE USART_BAUDRATE_DIV T0_INIT T0_PRESC SCHEDULER_INC USART_INC LIGHT_INC USART_BAUDRATE SIZE_RECEIVE_BUFFER USART_RX_BUFFER_SIZE
+syn keyword CTagsDefinedName SIZE_RECEIVE_BUFFER USART_TX_BUFFER_SIZE USART_BAUDRATE T0_FREQ LIGHT_INC AMOUNT_PAIR T0_INIT USART_RX_BUFFER_SIZE SCHEDULER_INC USART_BAUDRATE_DIV PARSER_INC T0_PRESC ADC_VREF_TYPE MAXTASKS USART_INC
 

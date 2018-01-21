@@ -18,4 +18,5 @@ void ADCInit(void);
 int16_t ADCRead(uint8_t chanel);
 int ConvertTempADC(int value);
 int ConvertADCTemp(int value);
+void IntToString(int16_t value, char *strBuf);
 #endif   /* ----- #ifndef LIGHT_INC  ----- */

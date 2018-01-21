@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L device:R R1
+L light-rescue:R-device R1
 U 1 1 5A32B3B5
 P 2700 1100
 F 0 "R1" V 2800 1050 50  0000 L CNN
@@ -74,7 +74,7 @@ $EndComp
 Wire Wire Line
 	4350 1050 4350 850 
 $Comp
-L Connector:Conn_01x06 J1
+L light-rescue:Conn_01x06-Connector J1
 U 1 1 5A347467
 P 5700 2200
 F 0 "J1" H 5780 2192 50  0000 L CNN
@@ -165,7 +165,7 @@ Connection ~ 3150 1100
 Wire Wire Line
 	3150 1100 3150 1150
 $Comp
-L device:C C1
+L light-rescue:C-device C1
 U 1 1 5A348923
 P 1600 1100
 F 0 "C1" V 1348 1100 50  0000 C CNN
@@ -224,7 +224,7 @@ $EndComp
 Wire Wire Line
 	2000 1850 2250 1850
 $Comp
-L device:Crystal Y1
+L light-rescue:Crystal-device Y1
 U 1 1 5A3659C3
 P 1950 2350
 F 0 "Y1" H 1800 2400 50  0000 C CNN
@@ -243,7 +243,7 @@ Wire Wire Line
 Wire Wire Line
 	2250 2350 2200 2350
 $Comp
-L device:C C2
+L light-rescue:C-device C2
 U 1 1 5A36641A
 P 1650 2700
 F 0 "C2" H 1765 2746 50  0000 L CNN
@@ -254,7 +254,7 @@ F 3 "" H 1650 2700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:C C3
+L light-rescue:C-device C3
 U 1 1 5A36649F
 P 2200 2700
 F 0 "C3" H 2315 2746 50  0000 L CNN
@@ -346,7 +346,7 @@ F 3 "" H 4750 2600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:R R2
+L light-rescue:R-device R2
 U 1 1 5A369DDB
 P 4750 1900
 F 0 "R2" H 4820 1946 50  0000 L CNN
@@ -374,7 +374,7 @@ $EndComp
 Wire Wire Line
 	4750 1650 4750 1750
 $Comp
-L atmel:ATMEGA8-16PU U1
+L light-rescue:ATMEGA8-16PU-atmel U1
 U 1 1 5A343891
 P 3150 2550
 F 0 "U1" H 2450 3850 50  0000 C CNN
@@ -389,4 +389,43 @@ Wire Wire Line
 Wire Wire Line
 	4750 2250 4750 2150
 Connection ~ 4750 2150
+$Comp
+L MCU_Atmel_ATMEGA:ATMEGA16-16AU U?
+U 1 1 5A6664FD
+P 8000 3050
+F 0 "U?" H 8000 5228 50  0000 C CNN
+F 1 "ATMEGA16-16AU" H 8000 5137 50  0000 C CNN
+F 2 "TQFP44" H 8000 3050 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/doc2466.pdf" H 8000 3050 50  0001 C CNN
+	1    8000 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L light-rescue:C-device C?
+U 1 1 5A666732
+P 1350 2050
+F 0 "C?" H 1465 2096 50  0000 L CNN
+F 1 "100n" H 1465 2005 50  0000 L CNN
+F 2 "" H 1388 1900 50  0001 C CNN
+F 3 "" H 1350 2050 50  0001 C CNN
+	1    1350 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 1750 2250 1750
+Wire Wire Line
+	1350 1750 1350 1900
+$Comp
+L power:GND #PWR?
+U 1 1 5A667154
+P 1350 2350
+F 0 "#PWR?" H 1350 2100 50  0001 C CNN
+F 1 "GND" H 1355 2177 50  0000 C CNN
+F 2 "" H 1350 2350 50  0001 C CNN
+F 3 "" H 1350 2350 50  0001 C CNN
+	1    1350 2350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 2350 1350 2200
 $EndSCHEMATC
