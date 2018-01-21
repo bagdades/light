@@ -35,9 +35,19 @@ void SchedulerInit(void)
 uint8_t SchedulerAddTask(void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod)
 {
 	uint8_t n = 0;
+	uint8_t i;
 	uint8_t retVal = FALSE;
-	while((taskArray[n].pfunc != 0 ) && (n < MAXTASKS))
-		n++;
+
+	cli();
+	for (i = 0; i < MAXTASKS; ++i) {
+		if(taskArray[i].pfunc == taskFunc) {
+			taskArray[i].delay = taskDelay;
+			retVal = TRUE;
+		}
+	}
+	if(!retVal) {
+		while((taskArray[n].pfunc != 0 ) && (n < MAXTASKS))
+			n++;
 		if (n < MAXTASKS) {
 			taskArray[n].pfunc = taskFunc;
 			taskArray[n].delay = taskDelay;
@@ -45,7 +55,9 @@ uint8_t SchedulerAddTask(void (*taskFunc)(void), uint16_t taskDelay, uint16_t ta
 			taskArray[n].run = 0;
 			retVal = TRUE;
 		}
-		return retVal;
+	}
+	sei();
+	return retVal;
 }
 
 void SchedulerDeleteTask(void (*taskFunc)(void))

@@ -23,10 +23,10 @@
 #include <util/delay.h>
 
 
-const float c1 = 24;
-const float v1 = 277;
-const float c2 = 215;
-const float v2 = 154;
+static const float c1 = 24;    /* Lower temperature */
+static const float v1 = 277;   /* ADC value for lower temperature */
+static const float c2 = 215;   /* Hight temperature */
+static const float v2 = 154;   /* ADC value for hight temperature */
 
 void InitSystem(void)
 {
